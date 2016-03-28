@@ -47,12 +47,19 @@ module.exports = function(grunt) {
     useref: {
     	html: 'dist/*.html',
     	temp: 'dist'
-    }
+    },
+    'gh-pages': {
+		options: {
+		base: 'dist'
+		},
+		src: ['**/*']
+	}
   });
 
   grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-useref');
+  grunt.loadNpmTasks('grunt-gh-pages');
 
   grunt.registerTask('default', ['autoprefixer','copy', 'useref']);
 
