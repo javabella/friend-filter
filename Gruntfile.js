@@ -40,6 +40,12 @@ module.exports = function(grunt) {
     				flatten: true,
     				src: ['app/*.html'],
     				dest: 'dist'
+    			},
+    			{
+    				expand: true,
+    				flatten: true,
+    				src: ['app/js/*.js'],
+    				dest: 'dist/js'
     			}
     		]
     	}
@@ -53,6 +59,23 @@ module.exports = function(grunt) {
 		base: 'dist'
 		},
 		src: ['**/*']
+	},
+	connect: {
+	    server: {
+	    	options: {
+	    		port: 8000,
+	    		base: {
+	    			path: 'app',
+	    			options: {
+	    				index: 'index.html'
+	    			}
+	    		},
+	    		keepalive: true,
+	    		open: {
+		          target: 'http://localhost:8000'
+		        }
+	    	}
+	    }
 	}
   });
 
@@ -60,6 +83,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-useref');
   grunt.loadNpmTasks('grunt-gh-pages');
+  grunt.loadNpmTasks('grunt-contrib-connect');
 
   grunt.registerTask('default', ['autoprefixer','copy', 'useref']);
 

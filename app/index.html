@@ -25,57 +25,7 @@
 				<div class="col-title">
 					<h3>Ваши друзья</h3>
 				</div>
-				<ul class="list list-of-all">
-					<li>
-						<div class="img-wrapper">
-							<img src="http://lorempixel.com/45/45/" alt=""/>
-						</div>
-						<div class="name">Иришка Кочерыжка</div>
-						<i class="fa fa-plus"></i>
-					</li>
-					<li>
-						<div class="img-wrapper">
-							<img src="http://lorempixel.com/45/45/" alt=""/>
-						</div>
-						<div class="name">Иришка Кочерыжка</div>
-						<i class="fa fa-plus"></i>
-					</li>
-					<li>
-						<div class="img-wrapper">
-							<img src="http://lorempixel.com/45/45/" alt=""/>
-						</div>
-						<div class="name">Иришка Кочерыжка</div>
-						<i class="fa fa-plus"></i>
-					</li>
-					<li>
-						<div class="img-wrapper">
-							<img src="http://lorempixel.com/45/45/" alt=""/>
-						</div>
-						<div class="name">Иришка Кочерыжка</div>
-						<i class="fa fa-plus"></i>
-					</li>
-					<li>
-						<div class="img-wrapper">
-							<img src="http://lorempixel.com/45/45/" alt=""/>
-						</div>
-						<div class="name">Иришка Кочерыжка</div>
-						<i class="fa fa-plus"></i>
-					</li>
-					<li>
-						<div class="img-wrapper">
-							<img src="http://lorempixel.com/45/45/" alt=""/>
-						</div>
-						<div class="name">Иришка Кочерыжка</div>
-						<i class="fa fa-plus"></i>
-					</li>
-					<li>
-						<div class="img-wrapper">
-							<img src="http://lorempixel.com/45/45/" alt=""/>
-						</div>
-						<div class="name">Иришка Кочерыжка</div>
-						<i class="fa fa-plus"></i>
-					</li>
-				</ul>
+				<ul class="list list-of-all"></ul>
 			</div>
 			<div class="window-col">
 				<div class="filters">
@@ -87,20 +37,27 @@
 				<div class="col-title">
 					<h3>Друзья в списке</h3>
 				</div>
-				<ul class="list list-of-selected">
-					<li>
-						<div class="img-wrapper">
-							<img src="http://lorempixel.com/45/45/" alt=""/>
-						</div>
-						<div class="name">Иришка Кочерыжка</div>
-						<i class="fa fa-times"></i>
-					</li>
-				</ul>
+				<ul class="list list-of-selected"></ul>
 			</div>
 			<div class="window-action">
 				<button type="button" class="btn save">Сохранить</button>
 			</div>
 		</div>
 	</main>
+
+	<template id="li-template" style="display:none;">
+		<li>
+			<div class="img-wrapper">
+				<img src="" alt=""/>
+			</div>
+			<div class="name"></div>
+			<i class="fa fa-plus"></i>
+		</li>
+	</template>
+
+	<script src="https://vk.com/js/api/openapi.js" type="text/javascript"></script>
+	<script src="js/vk-actions.js"></script>
+	<script src="js/friends.js"></script>
+	<script src="js/list.js"></script>
 </body>
 </html>
