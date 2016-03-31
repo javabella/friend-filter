@@ -212,8 +212,7 @@ main {
 }
 
 .list {
-    max-height: 350px;
-    min-height: 200px;
+    height: 350px;
     margin: 0;
     overflow-y: auto;
 
@@ -283,4 +282,24 @@ main {
 
 .list li:hover {
     background: #f0f0f0;
+}
+
+[draggable] {
+    cursor: move;
+    cursor:         grab;
+    cursor:    -moz-grab;
+    cursor: -webkit-grab;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+            user-select: none;
+
+     -khtml-user-drag: element;
+     -khtml-user-select: none;
+    -webkit-user-drag: element;
+}
+
+[draggable]:active {
+    cursor:         grabbing;
+    cursor:    -moz-grabbing;
+    cursor: -webkit-grabbing;
 }
