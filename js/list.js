@@ -1,16 +1,14 @@
 'use strict';
 (function() {
 
-	/**
-	 * @type {?List}
-	 */
-	window.list = null;
+	/* global filterAll:true */
+	/* global filterSelected:true */
 
 	/**
 	 * @param {Array<Friend>} data array of friends
 	 */
 	function List(data) {
-		this._data = data;
+		this.data = data;
 		this._containerOfAll = document.querySelector('.list-of-all');
 		this._containerOfSelected = document.querySelector('.list-of-selected');
 		this._container = document.querySelector('.window');
@@ -24,7 +22,10 @@
 			this.clear();
 			var fragmentForAll = document.createDocumentFragment();
 			var fragmentForSelected = document.createDocumentFragment();
-			this._data.forEach(function(item) {
+			this.data.forEach(function(item) {
+				if (!item.element) {
+					return;
+				}
 				if (item.selected) {
 					fragmentForSelected.appendChild(item.element);
 				} else {
@@ -51,9 +52,22 @@
 			var target = e.target;
 			if (target.classList.contains('fa-plus') || target.classList.contains('fa-times')) {
 				var index = target.parentNode.getAttribute('data-index');
-				this._data[index].selected = target.classList.contains('fa-plus');
-				this._data[index].render(index);
+				this.data[index].selected = target.classList.contains('fa-plus');
+				this._filterCheck(this.data[index]);
+				this.data[index].render(index);
 				this.show();
+			}
+		},
+
+		/**
+		 * send item to filters for check
+		 * @param  {Friend} item
+		 */
+		_filterCheck: function(item) {
+			if (item.selected) {
+				filterSelected.check(item);
+			} else {
+				filterAll.check(item);
 			}
 		},
 		_onItemDrag: function(e) {
@@ -68,8 +82,9 @@
 		_onItemDrop: function(e, isSelectedArea) {
 			e.preventDefault();
 			var index = e.dataTransfer.getData('index');
-			this._data[index].selected = isSelectedArea;
-			this._data[index].render(index);
+			this.data[index].selected = isSelectedArea;
+			this._filterCheck(this.data[index]);
+			this.data[index].render(index);
 			this.show();
 		},
 		listenSaveClick: function() {
@@ -83,7 +98,7 @@
 			var target = e.target;
 			var selected = [];
 			if (target.classList.contains('save')) {
-				this._data.forEach(function(item) {
+				this.data.forEach(function(item) {
 					if (item.selected) {
 						selected.push(item.userId);
 					}

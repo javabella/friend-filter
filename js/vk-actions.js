@@ -5,12 +5,10 @@
 	/* global Friend:true */
 	/* global List:true */
 	/* global list:true */
+	/* global filterAll:true */
+	/* global filterSelected:true */
+	/* global Filter:true */
 
-	/**
-	 * Array of users' VK friends
-	 * @type {Array<Friend>}
-	 */
-	var friends = [];
 	VK.init({
 		apiId: 5385217
 	});
@@ -34,6 +32,12 @@
 			fields: 'nickname, photo_50'
 		}, function(r) {
 			if (r.response) {
+
+				/**
+				 * Array of users' VK friends
+				 * @type {Array<Friend>}
+				 */
+				var friends = [];
 				var savedList = localStorage.getItem('selected');
 				r.response.forEach(function(man, index) {
 					var friend = new Friend(
@@ -46,10 +50,14 @@
 					friends.push(friend);
 					friend.render(index);
 				});
-				list = new List(friends);
+				window.list = new List(friends);
 				list.show();
 				list.listenItemActions();
 				list.listenSaveClick();
+				window.filterAll = new Filter('.find-from-all', false);
+				window.filterSelected = new Filter('.find-from-selected', true);
+				filterAll.init();
+				filterSelected.init();
 			}
 		});
 	}
