@@ -61,7 +61,7 @@
 
 		/**
 		 * send item to filters for check
-		 * @param  {[type]} item [description]
+		 * @param  {Friend} item
 		 */
 		_filterCheck: function(item) {
 			if (item.selected) {
