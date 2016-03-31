@@ -2,11 +2,15 @@
 (function() {
 
 	/* global VK:true */
-	/* global friends:true */
 	/* global Friend:true */
 	/* global List:true */
 	/* global list:true */
 
+	/**
+	 * Array of users' VK friends
+	 * @type {Array<Friend>}
+	 */
+	var friends = [];
 	VK.init({
 		apiId: 5385217
 	});
@@ -30,13 +34,22 @@
 			fields: 'nickname, photo_50'
 		}, function(r) {
 			if (r.response) {
-				r.response.forEach(function(man) {
-					var friend = new Friend(man.first_name, man.last_name, man.photo_50);
+				var savedList = localStorage.getItem('selected');
+				r.response.forEach(function(man, index) {
+					var friend = new Friend(
+						man.first_name,
+						man.last_name,
+						man.photo_50,
+						man.user_id,
+						(savedList && savedList.indexOf(man.user_id) > -1)
+					);
 					friends.push(friend);
-					friend.render();
+					friend.render(index);
 				});
 				list = new List(friends);
 				list.show();
+				list.listenItemActions();
+				list.listenSaveClick();
 			}
 		});
 	}

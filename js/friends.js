@@ -2,26 +2,29 @@
 (function() {
 
 	/**
-	 * Array of users' VK friends
-	 * @type {Array<Friend>}
-	 */
-	window.friends = [];
-
-	/**
 	 * @constructor
-	 * @param {string} firstName
-	 * @param {string} lastName
-	 * @param {string} photoSrc
+	 * @param {string} 	firstName
+	 * @param {string} 	lastName
+	 * @param {string} 	photoSrc
+	 * @param {number} 	userId
+	 * @param {boolean} selected
 	 */
-	function Friend(firstName, lastName, photoSrc) {
+	function Friend(firstName, lastName, photoSrc, userId, selected) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.photoSrc = photoSrc;
+		this.userId = userId;
+		this.selected = selected;
 		this._template = document.querySelector('#li-template');
 	}
 
 	Friend.prototype = {
-		render: function() {
+
+		/**
+		 * items' render
+		 * @param  {(number|string)} index index in array of initial list of friends
+		 */
+		render: function(index) {
 			if ('content' in this._template) {
 				this.element = this._template.content.children[0].cloneNode(true);
 			} else {
@@ -30,6 +33,14 @@
 
 			this.element.querySelector('img').src = this.photoSrc;
 			this.element.querySelector('.name').textContent = this.firstName + ' ' + this.lastName;
+			this.element.setAttribute('data-index', index);
+			this.element.setAttribute('data-uid', this.userId);
+
+			if (this.selected) {
+				this.element.querySelector('.fa').classList.remove('fa-plus');
+			} else {
+				this.element.querySelector('.fa').classList.remove('fa-times');
+			}
 		}
 	}
 
